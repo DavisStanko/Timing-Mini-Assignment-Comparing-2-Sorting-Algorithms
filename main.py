@@ -1,3 +1,6 @@
+# USE ERROR MESSAGES
+# Add trials
+
 import random
 import numpy as np
 import time
@@ -26,13 +29,55 @@ def time_bogo_sort(bogo_data_set):
         random.shuffle(bogo_data_set)
     end = time.time()
     difference = end - start
-    print(f"Bogo sorted data set:\n{bogo_data_set}")
-    print(f"Time taken: {difference} seconds")
+    print(f"\nBogo sorted data set:\n{bogo_data_set}")
+    print(f"\nTime taken: {difference} seconds")
 
 
-def time_insertion_sort(insertion_data_set):
+# Radix sort in Python
+
+
+# Using counting sort to sort the elements in the basis of significant places
+def countingSort(radix_data_set, place):
+    size = len(radix_data_set)
+    output = [0] * size
+    count = [0] * 10
+
+    # Calculate count of elements
+    for i in range(0, size):
+        index = radix_data_set[i] // place
+        count[index % 10] += 1
+
+    # Calculate cumulative count
+    for i in range(1, 10):
+        count[i] += count[i - 1]
+
+    # Place the elements in sorted order
+    i = size - 1
+    while i >= 0:
+        index = radix_data_set[i] // place
+        output[count[index % 10] - 1] = radix_data_set[i]
+        count[index % 10] -= 1
+        i -= 1
+
+    for i in range(0, size):
+        radix_data_set[i] = output[i]
+
+
+# Main function to implement radix sort
+def time_radix_sort(radix_data_set):
     start = time.time()
-    print("Not implemented yet")
+    # Get maximum element
+    max_element = max(radix_data_set)
+
+    # Apply counting sort to sort elements based on place value.
+    place = 1
+    while max_element // place > 0:
+        countingSort(radix_data_set, place)
+        place *= 10
+    end = time.time()
+    difference = end - start
+    print(f"Radix sorted data set:\n{radix_data_set}")
+    print(f"\nTime taken: {difference} seconds")
 
 
 def time_numpy_sort(numpy_data_set):  # Default numpy sort no arguments
@@ -40,8 +85,8 @@ def time_numpy_sort(numpy_data_set):  # Default numpy sort no arguments
     numpy_sorted_data_set = np.sort(numpy_data_set)
     end = time.time()
     difference = end - start
-    print(f"Numpy sorted data set:\n{numpy_sorted_data_set}")
-    print(f"Time taken: {difference} seconds\n")
+    print(f"\nNumpy sorted data set:\n{numpy_sorted_data_set}")
+    print(f"\nTime taken: {difference} seconds\n")
 
 
 def set_size():
@@ -61,14 +106,18 @@ def set_max_number():
 def set_time_choice():
     global time_choice
     time_choice = int(input("\nPlease select a timing method:\n1. Timing with time.time()\n2. Timing with other\n"))  # Get timing method
-    if time_choice != 1 or 2:  # Check if input is valid
+    if time_choice == 1 or 2:  # Check if input is valid
+        return
+    else:
         set_time_choice()
 
 
 def set_sort_choice():
     global sort_choice
-    sort_choice = input("\nPlease select a sorting method:\n1. Bogo sort\n2. Insertion sort\n3. Numpy sort\n")  # Get sorting method
-    if sort_choice != 1 or 2 or 3:  # Check if input is valid
+    sort_choice = int(input("\nPlease select a sorting method:\n1. Bogo sort\n2. Radix sort\n3. Numpy sort\n"))  # Get sorting method
+    if sort_choice == 1 or 2 or 3:  # Check if input is valid
+        return
+    else:
         set_sort_choice()
 
 
@@ -89,7 +138,7 @@ def main():
         if sort_choice == 1:
             time_bogo_sort(data_set)
         elif sort_choice == 2:
-            time_insertion_sort(data_set)
+            time_radix_sort(data_set)
         elif sort_choice == 3:
             time_numpy_sort(data_set)
         else:

@@ -1,8 +1,10 @@
 # USE ERROR MESSAGES
 # Add trials
-#timing method 2
-#run all at once and compare
-#explain how to chose set max and trial numbers
+# timing method 2
+# run all at once and compare
+# explain how to chose set max and trial numbers
+# Readme
+# Reflection
 
 import random
 import numpy as np

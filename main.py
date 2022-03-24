@@ -1,4 +1,3 @@
-# USE ERROR MESSAGES
 # Add trials
 # timing method 2
 # run all at once and compare
@@ -39,8 +38,6 @@ def time_bogo_sort(bogo_data_set):
 
 
 # Radix sort in Python
-
-
 # Using counting sort to sort the elements in the basis of significant places
 def countingSort(radix_data_set, place):
     size = len(radix_data_set)
@@ -98,6 +95,7 @@ def set_size():
     global data_set_size
     data_set_size = input("\nData set size? (Recomended 10-100)\n")  # Get data set size
     if data_set_size.isdigit() == False:  # Check if input is a number
+        print(input_int_error)
         set_size()
 
 
@@ -105,6 +103,7 @@ def set_max_number():
     global max_number
     max_number = input("\nMax number? (Recomended 1000)\n")  # Get max number
     if max_number.isdigit() == False:  # Check if input is a number
+        print(input_int_error)
         set_max_number()
 
 
@@ -114,6 +113,7 @@ def set_time_choice():
     if time_choice == 1 or 2:  # Check if input is valid
         return
     else:
+        print(out_of_range_error)
         set_time_choice()
 
 
@@ -123,6 +123,7 @@ def set_sort_choice():
     if sort_choice == 1 or 2 or 3:  # Check if input is valid
         return
     else:
+        print(out_of_range_error)
         set_sort_choice()
 
 

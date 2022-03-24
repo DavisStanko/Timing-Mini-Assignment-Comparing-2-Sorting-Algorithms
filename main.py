@@ -13,6 +13,7 @@ import random
 # initialize variables
 data_set_size = 0
 max_number = 0
+trials = 0
 time_choice = 0
 sort_choice = 0
 
@@ -23,10 +24,9 @@ fatal_error = "Fatal error: Please resart the program. If the error persists, pl
 
 print("\n" * 100)  # Clear screen
 
-########################################################################################################################
+################################################## Sorting Algorithms ##################################################
 
-
-def time_bogo_sort(bogo_data_set):
+def time_bogo_sort(bogo_data_set): #Bogo sort timed with time.time()
     i = 0
     start = time.time()
     while bogo_data_set != sorted(bogo_data_set):
@@ -37,7 +37,7 @@ def time_bogo_sort(bogo_data_set):
     print(f"\nTime taken: {difference} seconds")
 
 
-# Radix sort in Python
+# Radix sort timed with time.time()
 # Using counting sort to sort the elements in the basis of significant places
 def countingSort(radix_data_set, place):
     size = len(radix_data_set)
@@ -81,7 +81,7 @@ def time_radix_sort(radix_data_set):
     print(f"Radix sorted data set:\n{radix_data_set}")
     print(f"\nTime taken: {difference} seconds")
 
-
+#Numpy sort timed with time.time()
 def time_numpy_sort(numpy_data_set):  # Default numpy sort no arguments
     start = time.time()
     numpy_sorted_data_set = np.sort(numpy_data_set)
@@ -90,6 +90,7 @@ def time_numpy_sort(numpy_data_set):  # Default numpy sort no arguments
     print(f"\nNumpy sorted data set:\n{numpy_sorted_data_set}")
     print(f"\nTime taken: {difference} seconds\n")
 
+###################################################### User Input ######################################################
 
 def set_size():
     global data_set_size
@@ -105,6 +106,14 @@ def set_max_number():
     if max_number.isdigit() == False:  # Check if input is a number
         print(input_int_error)
         set_max_number()
+
+
+def set_trials():
+    global trials
+    trials = input("\nNumber of trials? (Recomended 1-10)\n")  # Get number of trials
+    if trials.isdigit() == False:  #Check if input is a number
+        print(input_int_error)
+        set_trials()
 
 
 def set_time_choice():
@@ -131,6 +140,7 @@ def main():
     data_set = []  # Initialize data set
     set_size()  # Get data set size
     set_max_number()  # Get max number
+    set_trials()  # Get number of trials
 
     for i in range(int(data_set_size)):  # Generate data set
         data_set.append(random.randint(0, int(max_number)))

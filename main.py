@@ -1,4 +1,5 @@
 # Add trials
+# #for I in trials start()
 # timing method 2
 # run all at once and compare
 # explain how to chose set max and trial numbers

@@ -1,10 +1,6 @@
-# Add trials
-# #for I in trials start()
 # timing method 2
-# run all at once and compare
-# explain how to chose set max and trial numbers
 # Readme
-# Reflection
+# Out of range error not working
 
 import random
 import numpy as np
@@ -17,6 +13,7 @@ max_number = 0
 trials = 0
 time_choice = 0
 sort_choice = 0
+total_time = 0
 
 # error messages
 input_int_error = "Please enter an integer"
@@ -27,27 +24,31 @@ print("\n" * 100)  # Clear screen
 
 ################################################## Sorting Algorithms ##################################################
 
-def time_bogo_sort(bogo_data_set): #Bogo sort timed with time.time()
-    i = 0
+
+def time_bogo_sort(bogo_data_set):  # Bogo sort timed with time.time()
+    global total_time
+    temp_data_set = bogo_data_set.copy()
+    sorted_data_set = sorted(temp_data_set.copy()) # This is really stupid. It sorts the data set to see if it sorted correctly. Therefore it's quicker to just user sorted() by itself. I have left it out of the timing method to remove it's impact from the overall time.
     start = time.time()
-    while bogo_data_set != sorted(bogo_data_set):
-        random.shuffle(bogo_data_set)
+    while temp_data_set != sorted_data_set: 
+        random.shuffle(temp_data_set)
     end = time.time()
     difference = end - start
-    print(f"\nBogo sorted data set:\n{bogo_data_set}")
+    print(f"\nBogo sorted data set:\n{temp_data_set}")
     print(f"\nTime taken: {difference} seconds")
+    total_time = total_time + difference
 
 
 # Radix sort timed with time.time()
 # Using counting sort to sort the elements in the basis of significant places
-def countingSort(radix_data_set, place):
-    size = len(radix_data_set)
+def countingSort(temp_data_set, place):
+    size = len(temp_data_set)
     output = [0] * size
     count = [0] * 10
 
     # Calculate count of elements
     for i in range(0, size):
-        index = radix_data_set[i] // place
+        index = temp_data_set[i] // place
         count[index % 10] += 1
 
     # Calculate cumulative count
@@ -57,41 +58,50 @@ def countingSort(radix_data_set, place):
     # Place the elements in sorted order
     i = size - 1
     while i >= 0:
-        index = radix_data_set[i] // place
-        output[count[index % 10] - 1] = radix_data_set[i]
+        index = temp_data_set[i] // place
+        output[count[index % 10] - 1] = temp_data_set[i]
         count[index % 10] -= 1
         i -= 1
 
     for i in range(0, size):
-        radix_data_set[i] = output[i]
+        temp_data_set[i] = output[i]
 
 
 # Main function to implement radix sort
 def time_radix_sort(radix_data_set):
+    global total_time
+    temp_data_set = radix_data_set.copy()
     start = time.time()
     # Get maximum element
-    max_element = max(radix_data_set)
+    max_element = max(temp_data_set)
 
     # Apply counting sort to sort elements based on place value.
     place = 1
     while max_element // place > 0:
-        countingSort(radix_data_set, place)
+        countingSort(temp_data_set, place)
         place *= 10
     end = time.time()
     difference = end - start
-    print(f"Radix sorted data set:\n{radix_data_set}")
+    print(f"Radix sorted data set:\n{temp_data_set}")
     print(f"\nTime taken: {difference} seconds")
+    total_time = total_time + difference
 
-#Numpy sort timed with time.time()
+# Numpy sort timed with time.time()
+
+
 def time_numpy_sort(numpy_data_set):  # Default numpy sort no arguments
+    global total_time
+    temp_data_set = numpy_data_set.copy()
     start = time.time()
-    numpy_sorted_data_set = np.sort(numpy_data_set)
+    numpy_sorted_data_set = np.sort(temp_data_set)
     end = time.time()
     difference = end - start
     print(f"\nNumpy sorted data set:\n{numpy_sorted_data_set}")
     print(f"\nTime taken: {difference} seconds\n")
+    total_time = total_time + difference
 
 ###################################################### User Input ######################################################
+
 
 def set_size():
     global data_set_size
@@ -112,7 +122,7 @@ def set_max_number():
 def set_trials():
     global trials
     trials = input("\nNumber of trials? (Recomended 1-10)\n")  # Get number of trials
-    if trials.isdigit() == False:  #Check if input is a number
+    if trials.isdigit() == False:  # Check if input is a number
         print(input_int_error)
         set_trials()
 
@@ -138,6 +148,7 @@ def set_sort_choice():
 
 
 def main():
+    global total_time
     data_set = []  # Initialize data set
     set_size()  # Get data set size
     set_max_number()  # Get max number
@@ -153,11 +164,18 @@ def main():
 
     if time_choice == 1:
         if sort_choice == 1:
-            time_bogo_sort(data_set)
+            for i in range(int(trials)):
+                time_bogo_sort(data_set)
+            print(f"\nAverage time taken: {float(total_time)/float(trials)} seconds")
+
         elif sort_choice == 2:
-            time_radix_sort(data_set)
+            for i in range(int(trials)):
+                time_radix_sort(data_set)
+            print(f"\nAverage time taken: {float(total_time)/float(trials)} seconds")
         elif sort_choice == 3:
-            time_numpy_sort(data_set)
+            for i in range(int(trials)):
+                time_numpy_sort(data_set)
+            print(f"\nAverage time taken: {float(total_time)/float(trials)} seconds")
         else:
             print(fatal_error)
     elif time_choice == 2:

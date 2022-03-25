@@ -1,7 +1,3 @@
-# timing method 2
-# Readme
-# Out of range error not working
-
 import random
 import numpy as np
 import time
@@ -104,7 +100,7 @@ def time_numpy_sort(numpy_data_set):  # Default numpy sort no arguments
 
 def set_size():
     global data_set_size
-    data_set_size = input("\nData set size? (Recomended 10-100)\n")  # Get data set size
+    data_set_size = input("\nData set size? (Recommended 10-100)\n")  # Get data set size
     if data_set_size.isdigit() == False:  # Check if input is a number
         print(input_int_error)
         set_size()
@@ -112,7 +108,7 @@ def set_size():
 
 def set_max_number():
     global max_number
-    max_number = input("\nMax number? (Recomended 1000)\n")  # Get max number
+    max_number = input("\nMax number? (Recommended 1000)\n")  # Get max number
     if max_number.isdigit() == False:  # Check if input is a number
         print(input_int_error)
         set_max_number()
@@ -120,7 +116,7 @@ def set_max_number():
 
 def set_trials():
     global trials
-    trials = input("\nNumber of trials? (Recomended 1-10)\n")  # Get number of trials
+    trials = input("\nNumber of trials? (Recommended 1-10)\n")  # Get number of trials
     if trials.isdigit() == False:  # Check if input is a number
         print(input_int_error)
         set_trials()
@@ -128,8 +124,8 @@ def set_trials():
 
 def set_time_choice():
     global time_choice
-    time_choice = int(input("\nPlease select a timing method:\n1. Timing with time.time()\n2. Timing with other\n"))  # Get timing method
-    if time_choice == 1 or 2:  # Check if input is valid
+    time_choice = int(input("\nPlease select a timing method:\n1. Timing with time.time() (Recommended)\n2. Timing with other\n"))  # Get timing method
+    if time_choice == 1 or time_choice == 2:  # Check if input is valid
         return
     else:
         print(out_of_range_error)
@@ -138,8 +134,8 @@ def set_time_choice():
 
 def set_sort_choice():
     global sort_choice
-    sort_choice = int(input("\nPlease select a sorting method:\n1. Bogo sort\n2. Radix sort\n3. Numpy sort\n"))  # Get sorting method
-    if sort_choice == 1 or 2 or 3:  # Check if input is valid
+    sort_choice = int(input("\nPlease select a sorting method:\n1. Bogo sort\n2. Radix sort\n3. Numpy sort (Recommended)\n"))  # Get sorting method
+    if sort_choice == 1 or sort_choice == 2 or sort_choice == 3:  # Check if input is valid
         return
     else:
         print(out_of_range_error)

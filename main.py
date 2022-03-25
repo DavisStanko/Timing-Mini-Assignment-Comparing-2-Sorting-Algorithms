@@ -25,12 +25,11 @@ print("\n" * 100)  # Clear screen
 ################################################## Sorting Algorithms ##################################################
 
 
-def time_bogo_sort(bogo_data_set):  # Bogo sort timed with time.time()
+def time_bogo_sort(bogo_data_set, sorted_data_set):  # Bogo sort timed with time.time()
     global total_time
     temp_data_set = bogo_data_set.copy()
-    sorted_data_set = sorted(temp_data_set.copy()) # This is really stupid. It sorts the data set to see if it sorted correctly. Therefore it's quicker to just user sorted() by itself. I have left it out of the timing method to remove it's impact from the overall time.
     start = time.time()
-    while temp_data_set != sorted_data_set: 
+    while temp_data_set != sorted_data_set:
         random.shuffle(temp_data_set)
     end = time.time()
     difference = end - start
@@ -164,8 +163,9 @@ def main():
 
     if time_choice == 1:
         if sort_choice == 1:
+            sorted_data_set = sorted(data_set.copy())  # This is really stupid. It sorts the data set to see if it sorted correctly. Therefore it's quicker to just user sorted() by itself. I have left it out of the timing method to remove it's impact from the overall time.
             for i in range(int(trials)):
-                time_bogo_sort(data_set)
+                time_bogo_sort(data_set, sorted_data_set)
             print(f"\nAverage time taken: {float(total_time)/float(trials)} seconds")
 
         elif sort_choice == 2:

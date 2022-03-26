@@ -28,7 +28,7 @@ def time_bogo_sort(bogo_data_set, sorted_data_set):  # Bogo sort timed with time
     while temp_data_set != sorted_data_set:
         random.shuffle(temp_data_set)
     end = time.time()
-    difference = end - start
+    difference = round(end - start, 10)
     print(f"\nBogo sorted data set:\n{temp_data_set}")
     print(f"\nTime taken: {difference} seconds")
     total_time = total_time + difference
@@ -76,7 +76,7 @@ def time_radix_sort(radix_data_set):
         countingSort(temp_data_set, place)
         place *= 10
     end = time.time()
-    difference = end - start
+    difference = round(end - start, 10)
     print(f"Radix sorted data set:\n{temp_data_set}")
     print(f"\nTime taken: {difference} seconds")
     total_time = total_time + difference
@@ -88,7 +88,7 @@ def time_numpy_sort(numpy_data_set):  # Default numpy sort no arguments timed wi
     start = time.time()
     numpy_sorted_data_set = np.sort(temp_data_set)
     end = time.time()
-    difference = end - start
+    difference = round(end - start, 10)
     print(f"\nNumpy sorted data set:\n{numpy_sorted_data_set}")
     print(f"\nTime taken: {difference} seconds\n")
     total_time = total_time + difference
@@ -103,7 +103,7 @@ def perf_bogo_sort(bogo_data_set, sorted_data_set):  # Bogo sort timed with time
     while temp_data_set != sorted_data_set:
         random.shuffle(temp_data_set)
     end = time.perf_counter()
-    difference = end - start
+    difference = round(end - start, 10)
     print(f"\nBogo sorted data set:\n{temp_data_set}")
     print(f"\nTime taken: {difference} seconds")
     total_time = total_time + difference
@@ -149,7 +149,7 @@ def perf_radix_sort(radix_data_set):
         countingSort(temp_data_set, place)
         place *= 10
     end = time.perf_counter()
-    difference = end - start
+    difference = round(end - start, 10)
     print(f"Radix sorted data set:\n{temp_data_set}")
     print(f"\nTime taken: {difference} seconds")
     total_time = total_time + difference
@@ -161,7 +161,7 @@ def perf_numpy_sort(numpy_data_set):  # Default numpy sort no arguments timed wi
     start = time.perf_counter()
     numpy_sorted_data_set = np.sort(temp_data_set)
     end = time.perf_counter()
-    difference = end - start
+    difference = round(end - start, 10)
     print(f"\nNumpy sorted data set:\n{numpy_sorted_data_set}")
     print(f"\nTime taken: {difference} seconds\n")
     total_time = total_time + difference

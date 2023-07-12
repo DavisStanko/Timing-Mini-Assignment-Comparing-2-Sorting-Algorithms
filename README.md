@@ -44,11 +44,6 @@ Built into python and is sufficient for most use cases. It attempt to provide th
 
 The speed at which a list is sorted is highly dependant on the host computer and as such results should not be compared across machines. Furthermore, the computer's CPU clock speed and temperature should be the same between runs to guarantee accuracy. These algorithms should not cause CPU throttling but even so some may occur (eg. Some Intel CPUs stop boosting after a specific time limit regardless of temperature). For this reason, attempting to sort a large data set using multiple trials may cause the later trials to run slower thus rasing the average time needed to sort the data set. To mitigate this effect when comparing algorithms directly, be sure to run the program with the exact same settings (data set size, max number, number of trials, timing method). Lastly, for performance reasons the list of unsorted numbers is only generated once regardless of the number of trials. This means that if the generated data set is favorable of unfavorable for the algorithm being used the effect will continue throughout all trials.
 
-## Author
-
-- **Davis Stanko** - *Lead Developer* -
-    [Website](https://davisstanko.com)
-
 ## License
 
 This project is licensed under the [GPL-3.0](LICENSE.md)
